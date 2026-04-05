@@ -31,7 +31,7 @@ paru -S --noconfirm \
     dgop dsearch matugen niri qt6-multimedia polkit-gnome \
     dms-shell-bin greetd-dms-greeter-git kitty totem loupe \
     wf-recorder gst-plugins-good gst-plugins-bad gst-plugins-ugly \
-    gst-libav ffmpegthumbnailer
+    gst-libav ffmpegthumbnailer samba
 
 # 4. Configure DMS & Greetd
 echo "Step 4: Configuring DMS and Greetd..."
