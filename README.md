@@ -49,6 +49,7 @@ sudo systemctl enable --now greetd
 ```
 reboot
 ```
+Setup your DMS with `Meta + ,`
 
 ## Install font
 ```
