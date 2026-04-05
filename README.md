@@ -2,6 +2,11 @@
 # Arch + DMS
 After install minimal arch with archinstall
 
+## Setup home dir
+```
+sudo pacman -S xdg-user-dirs && xdg-user-dirs-update
+```
+
 ## Install Paru
 ```
 sudo pacman -S --needed base-devel git
