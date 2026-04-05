@@ -54,8 +54,15 @@ reboot
 paru -S noto-fonts noto-fonts-emoji noto-fonts-cjk ttf-font-awesome
 ```
 
+## Add your full name
+```
+sudo chfn -f "My Full Name" username
+```
+
 ## Apps
+```
 paru -S krita gimp inkscape google-chrome visual-studio-code-bin
+```
 
 ## Free wallpapers
 ```
