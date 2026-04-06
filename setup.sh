@@ -70,12 +70,6 @@ echo "Step 6: User Personalization..."
 read -p "Enter your full name for this system: " full_name
 sudo chfn -f "$full_name" $(whoami)
 
-# Install and set Fish Shell
-echo "Installing Fish Shell..."
-paru -S --noconfirm fish
-echo "Switching default shell to Fish..."
-sudo chsh -s /usr/bin/fish $(whoami)
-
 # 7. Applications
 echo "Step 7: Installing productivity apps..."
 paru -S --noconfirm krita gimp inkscape google-chrome visual-studio-code-bin
@@ -122,6 +116,17 @@ done
 chmod +x "$HOME/.config/fish/functions"/*.fish 2>/dev/null
 
 echo "Step 9 complete!"
+# 10. Finalizing Shell & Services
+echo "Step 10: Finalizing system..."
+echo "Installing Fish Shell..."
+
+# Install Fish Shell if not already installed
+paru -S --noconfirm fish
+
+# Switch default shell to Fish (using usermod for better script reliability)
+echo "Switching default shell to Fish..."
+sudo usermod -s /usr/bin/fish $(whoami)
+
 echo "----------------------------------------------------"
 echo "Setup Complete! System is ready."
 echo "Please reboot to apply all changes and enter DMS."
