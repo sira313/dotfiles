@@ -75,10 +75,19 @@ echo "Step 7: Installing productivity apps..."
 paru -S --noconfirm krita gimp inkscape google-chrome visual-studio-code-bin
 
 # 8. Wallpapers
-echo "Step 8: Cloning wallpapers..."
-if [ ! -d "$HOME/Pictures/Wallpapers" ]; then
-    mkdir -p "$HOME/Pictures"
-    git clone https://github.com/mylinuxforwork/wallpaper "$HOME/Pictures/Wallpapers"
+echo "Step 8: Wallpapers..."
+read -p "Apakah Anda ingin melakukan git clone untuk wallpaper dari ML4W? (y/N): " confirm_wallpaper
+
+if [[ "$confirm_wallpaper" =~ ^[Yy]$ ]]; then
+    if [ ! -d "$HOME/Pictures/Wallpapers" ]; then
+        echo "Sedang mengunduh wallpaper..."
+        mkdir -p "$HOME/Pictures"
+        git clone https://github.com/mylinuxforwork/wallpaper "$HOME/Pictures/Wallpapers"
+    else
+        echo "Direktori wallpaper sudah ada, melewati langkah ini."
+    fi
+else
+    echo "Melewati instalasi wallpaper."
 fi
 
 echo "----------------------------------------------------"
