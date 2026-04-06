@@ -90,6 +90,44 @@ else
     echo "Melewati instalasi wallpaper."
 fi
 
+# --- Step 9: Sync Dotfiles (Place Files and Folders) ---
+echo "Step 9: Menempatkan file konfigurasi ke folder tujuan..."
+
+# Fungsi internal untuk menangani pengecekan folder dan replace file
+deploy_file() {
+    local src="$1"
+    local dest_dir="$2"
+    
+    # mkdir -p akan skip jika folder sudah ada, dan membuat jika belum ada
+    mkdir -p "$dest_dir"
+    
+    # Copy file (otomatis replace jika sudah ada)
+    if [ -f "$src" ]; then
+        cp "$src" "$dest_dir/"
+        echo "[OK] $src -> $dest_dir"
+    else
+        echo "[SKIP] File $src tidak ditemukan di folder repository"
+    fi
+}
+
+# Eksekusi penempatan sesuai directory tree
+deploy_file ".config/fastfetch/config.jsonrc" "$HOME/.config/fastfetch"
+deploy_file ".config/fish/config.fish" "$HOME/.config/fish"
+deploy_file ".config/fish/functions/share-off.fish" "$HOME/.config/fish/functions"
+deploy_file ".config/fish/functions/share-on.fish" "$HOME/.config/fish/functions"
+deploy_file ".config/fish/functions/start-win.fish" "$HOME/.config/fish/functions"
+deploy_file ".config/kitty/kitty.conf" "$HOME/.config/kitty"
+deploy_file ".config/niri/config.kdl" "$HOME/.config/niri"
+deploy_file ".config/niri/dms/binds.kdl" "$HOME/.config/niri/dms"
+deploy_file "Documents/windows11/podman-compose.yml" "$HOME/Documents/windows11"
+deploy_file ".local/share/applications/win-start.desktop" "$HOME/.local/share/applications"
+deploy_file ".local/share/applications/win-stop.desktop" "$HOME/.local/share/applications"
+
+# Memberikan izin eksekusi pada fungsi fish agar terbaca oleh shell
+chmod +x $HOME/.config/fish/functions/*.fish 2>/dev/null
+
+echo "Step 9 selesai!"
+
 echo "----------------------------------------------------"
 echo "Setup Complete! System is ready."
 echo "Please reboot to apply all changes and enter DMS."
