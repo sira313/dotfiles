@@ -91,8 +91,8 @@ git clone https://github.com/mylinuxforwork/wallpaper Pictures/Wallpapers
 ### Config
 Copy All dir & file exactly the same path
 
-### Tips 
-#### Samba
+## Tips 
+### Samba
 ```
 nano /etc/samba/smb.conf
 ```
@@ -134,7 +134,7 @@ Stop share Public dir
 share-off
 ```
 
-#### Windows
+### Windows
 Copy windows11.iso to `~/Documents/iso`
 ```
 cd Documents/windows11/ && podman-compose up -d && podman-compose logs -f
