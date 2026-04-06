@@ -17,11 +17,12 @@ xdg-user-dirs-update
 echo "Step 2: Installing Paru..."
 sudo pacman -S --needed --noconfirm base-devel git
 if ! command -v paru &> /dev/null; then
-    git clone https://aur.archlinux.org/paru.git
-    cd paru
+    _tempdir=$(mktemp -d)
+    git clone https://aur.archlinux.org/paru.git "$_tempdir"
+    cd "$_tempdir"
     makepkg -si --noconfirm
-    cd ..
-    rm -rf paru
+    cd -
+    rm -rf "$_tempdir"
 fi
 
 # 3. Install DMS and Core Components
@@ -93,28 +94,22 @@ fi
 # --- Step 9: Sync Dotfiles (Automated Sub-folder Detection) ---
 echo "Step 9: Synchronizing configuration files..."
 
-# List of top-level directories to be scanned from the repo
+# List of top-level directories to be scanned from the repository
 TOP_LEVEL_DIRS=(".config" ".local" "Documents")
 
 for dir in "${TOP_LEVEL_DIRS[@]}"; do
     if [ -d "$dir" ]; then
         echo "Processing directory: $dir"
         
-        # Find all subdirectories that contain files
-        find "$dir" -type d | while read -r subdir; do
-            
-            # Map repo subdirectory to the user's HOME path
-            target_path="$HOME/$subdir"
-
-            # Create target folder if it doesn't exist
-            mkdir -p "$target_path"
-            
-            # Copy files and replace existing ones (-f)
-            # Redirecting errors to null in case a directory is empty
-            cp -f "$subdir"/* "$target_path/" 2>/dev/null
-            
-        done
-        echo "[OK] Structure for $dir successfully synced."
+        # Ensure the parent directory exists in HOME (e.g., for .config/niri)
+        mkdir -p "$HOME/$(dirname "$dir")"
+        
+        # Syncing files:
+        # -a: Archive mode (preserves permissions, symlinks, and recurses)
+        # -x: Stay on this file system
+        cp -ax "$dir" "$HOME/"
+        
+        echo "[OK] $dir successfully synced."
     fi
 done
 
