@@ -90,27 +90,39 @@ else
     echo "Melewati instalasi wallpaper."
 fi
 
-# --- Step 9: Sync Dotfiles (Place Files and Folders) ---
-echo "Step 9: Menempatkan file konfigurasi ke folder tujuan..."
+# --- Step 9: Sync Dotfiles (Symlinking) ---
+echo "Step 9: Menghubungkan file konfigurasi (Symlink)..."
 
-# Fungsi internal untuk menangani pengecekan folder dan replace file
+# Ambil path folder repository saat ini secara absolut
+REPO_DIR=$(pwd)
+
 deploy_file() {
-    local src="$1"
+    local src="$REPO_DIR/$1"
     local dest_dir="$2"
+    local filename=$(basename "$1")
+    local target="$dest_dir/$filename"
     
-    # mkdir -p akan skip jika folder sudah ada, dan membuat jika belum ada
+    # Buat folder tujuan jika belum ada
     mkdir -p "$dest_dir"
     
-    # Copy file (otomatis replace jika sudah ada)
+    # Cek jika file sumber ada di repo
     if [ -f "$src" ]; then
-        cp "$src" "$dest_dir/"
-        echo "[OK] $src -> $dest_dir"
+        # Jika sudah ada file/link di target, hapus agar bisa ditimpa link baru
+        # Atau gunakan -b pada ln jika ingin backup otomatis dari sistem
+        if [ -f "$target" ] && [ ! -L "$target" ]; then
+            echo "[BACKUP] Memindahkan file lama ke $target.bak"
+            mv "$target" "$target.bak"
+        fi
+
+        # Buat symlink (-s: symbolic, -f: force/overwrite)
+        ln -sf "$src" "$target"
+        echo "[LINK] $src -> $target"
     else
-        echo "[SKIP] File $src tidak ditemukan di folder repository"
+        echo "[SKIP] File $src tidak ditemukan di repository"
     fi
 }
 
-# Eksekusi penempatan sesuai directory tree
+# Eksekusi penempatan (Gunakan path relatif terhadap root repo)
 deploy_file ".config/fastfetch/config.jsonrc" "$HOME/.config/fastfetch"
 deploy_file ".config/fish/config.fish" "$HOME/.config/fish"
 deploy_file ".config/fish/functions/share-off.fish" "$HOME/.config/fish/functions"
@@ -123,11 +135,10 @@ deploy_file "Documents/windows11/podman-compose.yml" "$HOME/Documents/windows11"
 deploy_file ".local/share/applications/win-start.desktop" "$HOME/.local/share/applications"
 deploy_file ".local/share/applications/win-stop.desktop" "$HOME/.local/share/applications"
 
-# Memberikan izin eksekusi pada fungsi fish agar terbaca oleh shell
-chmod +x $HOME/.config/fish/functions/*.fish 2>/dev/null
+# Berikan izin eksekusi pada file asli di dalam repo agar link-nya juga executable
+chmod +x .config/fish/functions/*.fish 2>/dev/null
 
-echo "Step 9 selesai!"
-
+echo "Step 9 selesai! Sekarang perubahan di repo akan otomatis aktif."
 echo "----------------------------------------------------"
 echo "Setup Complete! System is ready."
 echo "Please reboot to apply all changes and enter DMS."
