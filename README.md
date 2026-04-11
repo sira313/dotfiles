@@ -20,12 +20,46 @@ makepkg -si
 
 ### Install DMS and others
 ```
-paru -S nano brightnessctl quickshell cava cliphist wl-clipboard dgop dsearch matugen niri qt6-multimedia polkit-gnome dms-shell-bin greetd-dms-greeter-git kitty totem loupe wf-recorder gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-libav ffmpegthumbnailer samba freerdp podman-compose
+paru -S fish \
+  nano \
+  brightnessctl \
+  quickshell \
+  cava \
+  cliphist \
+  wl-clipboard \
+  dgop \
+  dsearch \
+  matugen \
+  niri \
+  qt6-multimedia \
+  polkit-gnome \
+  dms-shell-bin \
+  greetd-dms-greeter-git \
+  kitty \
+  totem \
+  loupe \
+  wf-recorder \
+  gst-plugins-good \
+  gst-plugins-bad \
+  gst-plugins-ugly \
+  gst-libav \
+  ffmpegthumbnailer \
+  samba \
+  freerdp \
+  podman-compose \
+```
+#### Use fish
+```
+chsh -s /usr/bin/fish
 ```
 
 #### Configure DMS
 ```
 dms setup
+```
+Then add this line to `~/.config/niri/config.kdl`
+```
+spawn-at-startup "sh" "-c" "dms run"
 ```
 
 #### Config greetd
@@ -70,7 +104,7 @@ sudo chfn -f "My Full Name" username
 
 ### Apps
 ```
-paru -S krita gimp inkscape google-chrome visual-studio-code-bin
+paru -S krita gimp inkscape google-chrome visual-studio-code-bin jamesdsp
 ```
 
 ### Free wallpapers
