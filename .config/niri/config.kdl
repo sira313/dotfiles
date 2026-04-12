@@ -277,7 +277,7 @@ window-rule {
 }
 
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-spawn-at-startup "sh" "-c" "dms run"
+spawn-at-startup "sh" "-c" "dms run &"
 
 
 // Include dms files
