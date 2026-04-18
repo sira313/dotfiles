@@ -175,8 +175,4 @@ Replace `generate.sh` with [the new one](https://github.com/sira313/dotfiles/blo
 
 Don't forget [this line](https://github.com/sira313/dotfiles/blob/b0136946b73e8d811bf60ecb02a78acac94632f8/.config/niri/config.kdl#L278)
 
-Create [~/.local/bin/watch-color.sh](https://github.com/sira313/dotfiles/blob/main/.local/bin/watch.color.sh)
-```
-chmod +x ~/.local/bin/watch-color.sh
-```
 Enjoy!!!
