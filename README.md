@@ -1,4 +1,9 @@
 ![ss](https://github.com/sira313/personal-Arch/blob/main/Screenshots/Screenshot%20from%202026-04-05%2012-44-12.png)
+![ss2](https://raw.githubusercontent.com/sira313/dotfiles/refs/heads/main/Screenshots/1.png)
+![ss2](https://raw.githubusercontent.com/sira313/dotfiles/refs/heads/main/Screenshots/2.png)
+![ss2](https://raw.githubusercontent.com/sira313/dotfiles/refs/heads/main/Screenshots/3.png)
+
+
 # Arch + DMS
 After install minimal arch with archinstall
 
