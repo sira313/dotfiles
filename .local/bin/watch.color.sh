@@ -4,7 +4,7 @@ FILE="$HOME/.local/share/color-schemes/DankMatugen.colors"
 # change with your own
 ICON_THEME_DIR="$HOME/Downloads/Vara"
 
-cd "$ICON_THEME_DIR" || { echo "Direktori does not exist"; exit 1; }
+cd "$ICON_THEME_DIR" || { echo "No such file or directory"; exit 1; }
 
 echo "Watching for changes in $FILE..."
 
