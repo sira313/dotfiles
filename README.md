@@ -172,3 +172,11 @@ Wait installation finish, debloat it!!!
 
 #### Shortcut
 Press `meta` + `space` search `Start Win` to start windows and freerdp. Use `Stop Win` to stop the service.
+
+### Icon Theme
+Icon location here `.config/Vara`
+Need to install Qogir Icon Theme (fallback)
+```
+paru -S qogir-icon-theme
+```
+
