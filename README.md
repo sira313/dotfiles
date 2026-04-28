@@ -14,7 +14,7 @@ sudo pacman -S xdg-user-dirs && xdg-user-dirs-update
 
 ### Install Paru
 ```
-sudo pacman -S --needed base-devel
+sudo pacman -S --needed base-devel git
 ```
 ```
 git clone https://aur.archlinux.org/paru.git && cd paru
