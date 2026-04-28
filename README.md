@@ -28,7 +28,7 @@ makepkg -si
 paru -S fish \
   nano \
   brightnessctl \
-  quickshell \
+  quickshell-git \
   cava \
   cliphist \
   wl-clipboard \
@@ -51,7 +51,7 @@ paru -S fish \
   ffmpegthumbnailer \
   samba \
   freerdp \
-  podman-compose \
+  podman-compose
 ```
 #### Use fish
 ```
